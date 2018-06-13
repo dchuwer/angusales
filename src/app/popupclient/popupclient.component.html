@@ -1,0 +1,38 @@
+  
+    <h2 mat-dialog-title>Add New Customer</h2>
+    <mat-dialog-content>New Customer</mat-dialog-content>
+    
+        
+         <mat-form-field>
+            <input matInput [(ngModel)]="newClient.firstname" placeholder="First Name">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput [(ngModel)]="newClient.lastname" placeholder="Last Name">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <mat-select  [(ngModel)]="newClient.company"  placeholder="Company">
+            <mat-option *ngFor="let company of companies"  [value]="company">
+              {{ company.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field>
+          <input matInput [(ngModel)]="newClient.company" placeholder="Company">
+        </mat-form-field> -->
+        <br>
+        <mat-form-field>
+          <input matInput [(ngModel)]="newClient.phone" placeholder="Phone">
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+          <input matInput [(ngModel)]="newClient.email" placeholder="Email">
+        </mat-form-field> 
+        <br>
+
+      <button mat-button mat-dialog-close>Cancel</button>
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+       <button mat-button [mat-dialog-close]="newClient">Submit</button>
+   
+       
