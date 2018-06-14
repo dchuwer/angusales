@@ -12,12 +12,12 @@ export class ClientService {
   clients = [];
   comments =[];
   constructor(private http : HttpClient) {
-    this.clientSubject = new Subject<number>();
+    this.clientSubject = new Subject<any>();
     this.clientUpdated = this.clientSubject.asObservable();
     this.getClients();
-    this.commentSubject = new Subject<number>();
+    this.commentSubject = new Subject<any>();
     this.commentUpdated = this.commentSubject.asObservable();
-    this.getComments();
+    // this.getComments();
   }
 
    getClients() : void {
@@ -28,20 +28,28 @@ export class ClientService {
     }
 
     addClient(newClient) {
-      console.log("service client -> API")
-      
+           
       this.http.post<any[]>('/apiclient/addclient',newClient).subscribe((data)=>{
-            this.getClients();
+            this.clients.push(data)
+            this.clientSubject.next(this.clients);
       });
     }
 
-    getComments(){
-      this.http.get<any[]>('/apiclient/comment').subscribe((data)=>{
+    getComments(client){
+      return this.http.get<any[]>('/apiclient/comment/'+client).subscribe((data)=>{
         this.comments = data;
+        console.log(data)
         this.commentSubject.next(this.comments);
+        
       });
 
     }
+
+    findClient(id) {
+      
+        return  this.clients.find( x => x._id == id )
+    }
+    
 
 
 

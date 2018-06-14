@@ -13,7 +13,7 @@ constructor(){
       type: Sequelize.STRING
       
     },
-    datw: {
+    date: {
       type: Sequelize.DATE
       
     },
@@ -21,7 +21,7 @@ constructor(){
     customer_id: {
         type: Sequelize.INTEGER,
         references: 'customer_table', 
-        referencesKey: 'client_id' 
+        referencesKey: '    ' 
         
       }
     },
@@ -29,14 +29,17 @@ constructor(){
     freezeTableName: true,    
     tableName: 'comment_table'
     });
-this.model.belongsTo(Client.model, {foreignKey: 'client_id'})
-Client.model.hasMany(this.model, {foreignKey: 'client_id'})
-  
+
+this.model.belongsTo(Client.model, {foreignKey: 'customer_id'})
+Client.model.hasMany(this.model, {foreignKey: 'customer_id'})
+
 }
 
-  getAll(){
-     return this.model.findAll( {include:
-       [{ model: Client.model, attributes: ['name']}]});
+  getComment(client){
+     return this.model.findAll({where: { customer_id: client},
+      include:
+        [ Client.model]}
+    );
   }
 
   addComment(newComment) {
@@ -52,5 +55,5 @@ Client.model.hasMany(this.model, {foreignKey: 'client_id'})
   }
   
 }
-const comment = new CommentModel()
+const comment = new CommentsModel()
   module.exports = comment;

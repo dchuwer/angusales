@@ -6,6 +6,8 @@ class CustomersModel{
 constructor(){
   this.model = dataAccess.connection.define('customer', {
     customer_id: {
+      
+      autoIncrement: true,
       type: Sequelize.INTEGER,
       primaryKey: true
     },
@@ -53,14 +55,12 @@ Company.model.hasMany(this.model, {foreignKey: 'company_id'})
 
   addClient(newClient) {
 
-    const client = this.model.build({ firstname: newClient.firstname,
+    return this.model.create({ firstname: newClient.firstname,
       lastname: newClient.lastname,
       company_id : newClient.company.company_id,
       phone: newClient.phone,
       email : newClient.email               
     });
-
-    return client.save();
 
   }
   

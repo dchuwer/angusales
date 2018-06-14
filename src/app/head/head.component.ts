@@ -13,7 +13,6 @@ export class HeadComponent implements OnInit {
   constructor(private clientService: ClientService, public dialog: MatDialog) { }
 
   addClient(){
-    console.log("entrei")
     let dialogRef = this.dialog.open(PopupclientComponent, {
       width: '600px',
       data: {  }
@@ -22,9 +21,6 @@ export class HeadComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       this.clientService.addClient(result);
-     
-      
-      
     });
   }
 

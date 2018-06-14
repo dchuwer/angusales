@@ -49,7 +49,7 @@ import { CommentComponent } from './comment/comment.component';
    
   
   ],
-  entryComponents: [PopupclientComponent],
+  entryComponents: [PopupclientComponent, CommentComponent],
   providers: [ClientService,CompanyService],
   bootstrap: [AppComponent]
 })
