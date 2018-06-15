@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class CompanyService {
+  
   public companyUpdated : Observable<any>;
   public companySubject: Subject<any>;
   companies = [];
@@ -21,6 +22,10 @@ export class CompanyService {
       this.companySubject.next(this.companies);
     });
     
+    }
+
+    findCompany(company_id) {
+      return  this.companies.find( x => x.company_id == company_id )
     }
 
     

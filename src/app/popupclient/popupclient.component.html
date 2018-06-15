@@ -1,8 +1,15 @@
-  
+  <div class="head" *ngIf=(showButton)>
     <h2 mat-dialog-title>Add New Customer</h2>
     <mat-dialog-content>New Customer</mat-dialog-content>
+
+</div>
+
+<div class="head" *ngIf=(!showButton)>
+    <h2 mat-dialog-title>Edit Customer</h2>
+    <mat-dialog-content>Edit Mode </mat-dialog-content>
     
-        
+</div>
+         <br>
          <mat-form-field>
             <input matInput [(ngModel)]="newClient.firstname" placeholder="First Name">
         </mat-form-field>
@@ -13,7 +20,7 @@
         <br>
         <mat-form-field>
           <mat-select  [(ngModel)]="newClient.company"  placeholder="Company">
-            <mat-option *ngFor="let company of companies"  [value]="company">
+            <mat-option *ngFor="let company of companies"  [value]="company.name">
               {{ company.name }}
             </mat-option>
           </mat-select>
@@ -31,6 +38,8 @@
 
       <button mat-button mat-dialog-close>Cancel</button>
       <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-       <button mat-button [mat-dialog-close]="newClient">Submit</button>
-   
+      <button mat-button mat-dialog-close (click)="addNewClient(newClient)">Submit</button>
+       <span class="editmode" *ngIf="!this.showButton">
+        <button mat-button mat-dialog-close (click)="deleteClient(newClient.customer_id)">Delete</button>
+       </span>
        

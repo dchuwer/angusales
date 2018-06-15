@@ -21,7 +21,7 @@ constructor(){
     customer_id: {
         type: Sequelize.INTEGER,
         references: 'customer_table', 
-        referencesKey: '    ' 
+        referencesKey: 'customer_id' 
         
       }
     },
@@ -30,30 +30,29 @@ constructor(){
     tableName: 'comment_table'
     });
 
-this.model.belongsTo(Client.model, {foreignKey: 'customer_id'})
-Client.model.hasMany(this.model, {foreignKey: 'customer_id'})
+//this.model.belongsToMany(Client.model, {foreignKey: 'customer_id'})
+//Client.model.hasMany(this.model, {foreignKey: 'customer_id'})
 
 }
 
   getComment(client){
-     return this.model.findAll({where: { customer_id: client},
-      include:
-        [ Client.model]}
+     return this.model.findAll({where: { customer_id: client}}
+      
     );
   }
 
   addComment(newComment) {
+    
+    return this.model.create({ text: newComment.text,
+                                 customer_id : newComment.customer_id,
+                                 date: new Date()          
+                            });
 
-    const comment = this.model.build({ text: newClient.text,
-      lastname: newClient.lastname,
-      client_id : newClient.client_id,
-      date: new Date()          
-    });
-
-    return comment.save();
+    
 
   }
   
 }
-const comment = new CommentsModel()
-  module.exports = comment;
+const comments = new CommentsModel();
+
+module.exports = comments;

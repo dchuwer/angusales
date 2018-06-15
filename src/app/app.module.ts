@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ClientComponent } from './client/client.component';
@@ -21,6 +22,8 @@ import { PopupclientComponent } from './popupclient/popupclient.component';
 import { HeadComponent } from './head/head.component';
 import { CompanyService } from './company.service';
 import { CommentComponent } from './comment/comment.component';
+import { AppRoutingModule } from './/app-routing.module';
+import { CompanyComponent } from './company/company.component';
 
 @NgModule({
   declarations: [ 
@@ -28,7 +31,8 @@ import { CommentComponent } from './comment/comment.component';
     ClientComponent,
     PopupclientComponent,
     HeadComponent,
-    CommentComponent
+    CommentComponent,
+    CompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,9 @@ import { CommentComponent } from './comment/comment.component';
     FormsModule,
     MatSelectModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    AppRoutingModule,
+    RouterModule
    
   
   ],

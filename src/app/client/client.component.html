@@ -49,9 +49,14 @@
 
   <ng-container matColumnDef="addcomment">
       <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let element" > <button mat-icon-button color="primary" (click)="showComments(element.customer_id)" ><mat-icon>add_comment</mat-icon></button> </td>
+      <td mat-cell *matCellDef="let element" > <button mat-icon-button color="primary" (click)="editCustomer(element.customer_id)" ><mat-icon>edit</mat-icon></button> </td>
     </ng-container>
-  
+
+  <ng-container matColumnDef="deleteclient">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td mat-cell *matCellDef="let element" > <button mat-icon-button color="primary" (click)="deleteCustomer(element.customer_id)" ><mat-icon>delete_forever</mat-icon></button> </td>
+  </ng-container>
+
    
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

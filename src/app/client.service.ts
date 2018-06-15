@@ -12,12 +12,13 @@ export class ClientService {
   clients = [];
   comments =[];
   constructor(private http : HttpClient) {
+    console.log("constructor client service")
     this.clientSubject = new Subject<any>();
     this.clientUpdated = this.clientSubject.asObservable();
     this.getClients();
     this.commentSubject = new Subject<any>();
     this.commentUpdated = this.commentSubject.asObservable();
-    // this.getComments();
+    
   }
 
    getClients() : void {
@@ -28,12 +29,30 @@ export class ClientService {
     }
 
     addClient(newClient) {
-           
+      console.log("entrei no addclient do server")
       this.http.post<any[]>('/apiclient/addclient',newClient).subscribe((data)=>{
             this.clients.push(data)
             this.clientSubject.next(this.clients);
       });
     }
+
+    updateClient(client){
+      this.http.put<any[]>('/apiclient/updateclient',client).subscribe((data)=>{
+          let ind = this.clients.findIndex( x => x.customer_id == client.customer_id)
+          this.clients[ind] = client;
+          this.clientSubject.next(this.clients)});
+    }
+
+    deleteClient(clientId){
+      console.log(clientId)
+      this.http.delete<any[]>('/apiclient/deleteclient/'+clientId).subscribe((data)=>{
+        console.log("voltou do server .. esta no service para remover do array")
+        let ind = this.clients.findIndex( x => x.customer_id == clientId)
+        console.log(ind)
+        this.clients.splice(ind,1)
+        this.clientSubject.next(this.clients)});
+    }
+
 
     getComments(client){
       return this.http.get<any[]>('/apiclient/comment/'+client).subscribe((data)=>{
@@ -45,9 +64,16 @@ export class ClientService {
 
     }
 
+    addNewComment(newComment){
+        this.http.post<any[]>('/apiclient/addcomment',newComment).subscribe((data)=>{
+        this.comments.push(data)
+        this.commentSubject.next(this.comments)});
+    }
+
+    
     findClient(id) {
       
-        return  this.clients.find( x => x._id == id )
+        return  this.clients.find( x => x.customer_id == id )
     }
     
 
