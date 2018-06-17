@@ -24,6 +24,7 @@ import { CompanyService } from './company.service';
 import { CommentComponent } from './comment/comment.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { CompanyComponent } from './company/company.component';
+import { PopupcompanyComponent } from './popupcompany/popupcompany.component';
 
 @NgModule({
   declarations: [ 
@@ -32,7 +33,8 @@ import { CompanyComponent } from './company/company.component';
     PopupclientComponent,
     HeadComponent,
     CommentComponent,
-    CompanyComponent
+    CompanyComponent,
+    PopupcompanyComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,7 @@ import { CompanyComponent } from './company/company.component';
    
   
   ],
-  entryComponents: [PopupclientComponent, CommentComponent],
+  entryComponents: [PopupclientComponent, CommentComponent, PopupcompanyComponent],
   providers: [ClientService,CompanyService],
   bootstrap: [AppComponent]
 })

@@ -3,7 +3,11 @@ table {
     width: 100%;
   }
   
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.icons-div {
+  width: 5%;
+}

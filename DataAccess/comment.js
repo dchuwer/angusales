@@ -7,7 +7,8 @@ constructor(){
   this.model = dataAccess.connection.define('comment', {
     comment_id: {
       type: Sequelize.INTEGER,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
     },
     text: {
       type: Sequelize.STRING
@@ -30,7 +31,7 @@ constructor(){
     tableName: 'comment_table'
     });
 
-//this.model.belongsToMany(Client.model, {foreignKey: 'customer_id'})
+//this.model.hasMany(Client.model, {foreignKey: 'customer_id'})
 //Client.model.hasMany(this.model, {foreignKey: 'customer_id'})
 
 }
@@ -43,7 +44,8 @@ constructor(){
 
   addComment(newComment) {
     
-    return this.model.create({ text: newComment.text,
+    return this.model.create({   
+                                 text: newComment.text,
                                  customer_id : newComment.customer_id,
                                  date: new Date()          
                             });

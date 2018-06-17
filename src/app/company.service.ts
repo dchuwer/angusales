@@ -28,7 +28,30 @@ export class CompanyService {
       return  this.companies.find( x => x.company_id == company_id )
     }
 
+    addCompany(newCompany) {
+      this.http.post<any[]>('/apicompany/addcompany',newCompany).subscribe((data)=>{
+        this.companies.push(data)
+        this.companySubject.next(this.companies);
+     });
+
+    }
+
+    deleteCompany(companyId){
+      
+      this.http.delete<any[]>('/apicompany/deletecompany/'+companyId).subscribe((data)=>{
+        let ind = this.companies.findIndex( x => x.company_id == companyId)
+        console.log(ind)
+        this.companies.splice(ind,1)
+        this.companySubject.next(this.companies)});
+    }
     
+    updateCompany(company){
+      this.http.put<any[]>('/apicompany/updatecompany',company).subscribe((data)=>{
+          let ind = this.companies.findIndex( x => x.company_id == company.company_id)
+          this.companies[ind] = company;
+          this.companySubject.next(this.companies)});
+    }
+
   }
 
   

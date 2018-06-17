@@ -1,0 +1,28 @@
+<div class="head" *ngIf=(showButton)>
+  <h2 mat-dialog-title>Add New Company</h2>
+  <mat-dialog-content>New Company</mat-dialog-content>
+
+</div>
+
+<div class="head" *ngIf=(!showButton)>
+  <h2 mat-dialog-title>Edit Company</h2>
+  <mat-dialog-content>Edit Mode </mat-dialog-content>
+  
+</div>
+       <br>
+       <mat-form-field>
+          <input matInput [(ngModel)]="newCompany.name" placeholder="Company Name">
+      </mat-form-field>
+      <br>
+      <mat-form-field>
+        <input matInput [(ngModel)]="newCompany.country" placeholder="Country">
+      </mat-form-field>
+      <br>
+    
+    <button mat-button mat-dialog-close>Cancel</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button mat-dialog-close (click)="addNewCompany(newCompany)">Submit</button>
+     <span class="editmode" *ngIf="!this.showButton">
+      <button mat-button mat-dialog-close (click)="deleteClient(newClient.customer_id)">Delete</button>
+     </span>
+     

@@ -29,7 +29,7 @@ export class ClientService {
     }
 
     addClient(newClient) {
-      console.log("entrei no addclient do server")
+     
       this.http.post<any[]>('/apiclient/addclient',newClient).subscribe((data)=>{
             this.clients.push(data)
             this.clientSubject.next(this.clients);
@@ -46,7 +46,6 @@ export class ClientService {
     deleteClient(clientId){
       console.log(clientId)
       this.http.delete<any[]>('/apiclient/deleteclient/'+clientId).subscribe((data)=>{
-        console.log("voltou do server .. esta no service para remover do array")
         let ind = this.clients.findIndex( x => x.customer_id == clientId)
         console.log(ind)
         this.clients.splice(ind,1)

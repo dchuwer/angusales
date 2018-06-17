@@ -3,6 +3,7 @@ import { PopupclientComponent } from '../popupclient/popupclient.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ClientService } from '../client.service';
 import { Router } from '@angular/router';
+import { PopupcompanyComponent } from '../popupcompany/popupcompany.component';
 
 
 @Component({
@@ -19,12 +20,19 @@ export class HeadComponent implements OnInit {
       width: '600px',
       data: {}
     });
+  }
 
+    addCompany(){
+      let dialogRef = this.dialog.open(PopupcompanyComponent, {
+        width: '600px',
+        data: {}
+      });
+    }
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log(result);
     //   this.clientService.addClient(result);
     // });
-  }
+  
 
   ngOnInit() {}
     

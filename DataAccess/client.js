@@ -57,8 +57,6 @@ Company.model.hasMany(this.model, {foreignKey: 'company_id'})
   }
 
   addClient(newClient) {
-    console.log("entrei no addclient do client API ")
-    console.log(newClient)
     return this.model.create({ firstname: newClient.firstname,
       lastname: newClient.lastname,
       company_id : newClient.company.company_id,
@@ -79,8 +77,8 @@ Company.model.hasMany(this.model, {foreignKey: 'company_id'})
 
   deleteClient(clientId) {
     console.log("entrei no deleteclient")
-    this.model.hasMany(Comments.model, {foreignKey: 'customer_id', onDelete: 'CASCADE'})
-    Comments.model.belongsTo(this.model, {foreignKey: 'customer_id'})
+    this.model.hasMany(Comments.model, {foreignKey: 'customer_id', onDelete: 'CASCADE', hooks: true})
+    Comments.model.belongsTo(this.model, {foreignKey: 'customer_id', onDelete: 'CASCADE', hooks: true})
     return this.model.destroy( {where : {customer_id : clientId} });
   }
   

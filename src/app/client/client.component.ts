@@ -84,6 +84,13 @@ export class ClientComponent {
    
   }
  
+  // addFilter(filter) {
+  //   console.log(filter)
+  //   let filterCompany =  this.companyService.companies.find( x => x.name == this.newClient.company )
+  //   let companySelected = this.companyService.findCompany(filter)
+  //   this.companyService.
+
+  // }
     
   ngOnInit() {
     this.clientService.getClients();
