@@ -13,6 +13,7 @@ import { Subscriber } from 'rxjs';
 })
 export class ClientComponent {
   first : boolean 
+  filterUp : boolean = false;
   clients : Array<any>;
   newClient : Object;
   dataSource = new MatTableDataSource(this.clients);
@@ -27,7 +28,7 @@ export class ClientComponent {
     }
   
 
-  displayedColumns = ['id', 'firstname', 'lastname', 'company', 'email', 'phone', 'comments','addcomment','deleteclient'];
+  displayedColumns = ['id', 'firstname', 'lastname', 'company', 'email', 'phone', 'icons'];
   
 
   applyFilter(filterValue: string) {
@@ -84,15 +85,18 @@ export class ClientComponent {
    
   }
  
-  // addFilter(filter) {
-  //   console.log(filter)
-  //   let filterCompany =  this.companyService.companies.find( x => x.name == this.newClient.company )
-  //   let companySelected = this.companyService.findCompany(filter)
-  //   this.companyService.
+  addFilter(filter) {
+    console.log(filter)
+    this.filterUp = true;
+    let filterCompany =  this.companyService.companies.find( x => x.name == filter )
+    //let companySelected = this.companyService.findCompany(filter)
+    console.log(filter)
+    this.clientService.getFilter(filterCompany.company_id);
 
-  // }
+  }
     
   ngOnInit() {
+    this.filterUp= false;
     this.clientService.getClients();
    
   }

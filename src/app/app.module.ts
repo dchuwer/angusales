@@ -14,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { RouterModule, Routes } from '@angular/router';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
 import { ClientComponent } from './client/client.component';
@@ -53,7 +54,8 @@ import { PopupcompanyComponent } from './popupcompany/popupcompany.component';
     MatIconModule,
     MatPaginatorModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    MatTooltipModule
    
   
   ],

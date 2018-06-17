@@ -28,6 +28,13 @@ export class ClientService {
       });
     }
 
+    getFilter(companyId) : void {
+      this.http.get<any[]>('/apiclient/filtercompany/'+companyId).subscribe((data)=>{
+        this.clients = data;
+        this.clientSubject.next(this.clients);
+      });
+    }
+
     addClient(newClient) {
      
       this.http.post<any[]>('/apiclient/addclient',newClient).subscribe((data)=>{

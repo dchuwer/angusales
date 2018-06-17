@@ -24,16 +24,15 @@
   </ng-container>
 
   
-  <ng-container matColumnDef="editcompany">
+  <ng-container matColumnDef="icons">
       <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let element" > <button mat-icon-button color="primary" (click)="editCompany(element.company_id)" ><mat-icon>edit</mat-icon></button> </td>
+      <td mat-cell *matCellDef="let element" > 
+        <button mat-icon-button color="primary" matTooltip="Edit Company" (click)="editCompany(element.company_id)" ><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="primary" matTooltip="Delete Company" (click)="deleteCompany(element.company_id)" ><mat-icon>delete_forever</mat-icon></button>
+      </td>
     </ng-container>
 
-  <ng-container matColumnDef="deletecompany">
-    <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element" > <button mat-icon-button color="primary" (click)="deleteCompany(element.company_id)" ><mat-icon>delete_forever</mat-icon></button> </td>
-  </ng-container>
-
+  
    
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

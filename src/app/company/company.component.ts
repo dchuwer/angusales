@@ -30,7 +30,7 @@ export class CompanyComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-   displayedColumns = ['id', 'name', 'country','editcompany','deletecompany']
+   displayedColumns = ['id', 'name', 'country','icons']
 
    deleteCompany(companyId){
     this.companyService.deleteCompany(companyId);

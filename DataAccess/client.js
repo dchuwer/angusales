@@ -56,13 +56,14 @@ Company.model.hasMany(this.model, {foreignKey: 'company_id'})
        [{ model: Company.model, attributes: ['name']}]});
   }
 
+  getFilter(companyId){
+    console.log(companyId)
+    return this.model.findAll( {where : {company_id : companyId},
+                                include:[{ model: Company.model, attributes: ['name']}]});
+ }
+
   addClient(newClient) {
-    return this.model.create({ firstname: newClient.firstname,
-      lastname: newClient.lastname,
-      company_id : newClient.company.company_id,
-      phone: newClient.phone,
-      email : newClient.email               
-    });
+    return this.model.create(newClient);
   }
 
   updateClient(client) {

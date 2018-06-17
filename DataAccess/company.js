@@ -1,6 +1,6 @@
 var Sequelize=require('sequelize');
 var dataAccess = require('./DataAccess');
-var Client = require('./client')
+var Customer = require('./client')
 
 
 class CompanyModel {
@@ -18,7 +18,9 @@ class CompanyModel {
     country: {
       type: Sequelize.STRING
       
-    },
+    }
+
+    
 
   },
     {
@@ -39,9 +41,9 @@ class CompanyModel {
   }
 
   deleteCompany(companyId) {
-    console.log("entrei no deleteclient")
-    this.model.belongsToMany(Client.model, {foreignKey: 'company_id', onDelete: 'CASCADE'})
-    //Client.model.belongsTo(this.model, {foreignKey: 'company_id', onDelete: 'CASCADE'})
+    console.log("entrei no deletecompany")
+    //this.model.hasMany(Customer.model, {foreignKey: 'company_id', onDelete: 'CASCADE', hooks: true})
+    //Customer.model.belongsTo(this.model, {foreignKey: 'company_id', onDelete: 'CASCADE',hooks: true})
     return this.model.destroy( {where : {company_id : companyId} });
   }
 

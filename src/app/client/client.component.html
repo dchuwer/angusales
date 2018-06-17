@@ -26,8 +26,8 @@
 
   <!-- Weight Column -->
   <ng-container matColumnDef="company">
-    <th mat-header-cell *matHeaderCellDef> Company </th>
-    <td mat-cell *matCellDef="let element" (click)="addFilter(element.company.name)"> {{element.company.name}} </td>
+    <th mat-header-cell *matHeaderCellDef> Company <span *ngIf="filterUp" (click)="ngOnInit()"><mat-icon>autorenew</mat-icon></span> </th>
+    <td mat-cell *matCellDef="let element"  (click)="addFilter(element.company.name)"> <span matTooltip="Filter by '{{element.company.name}}'">{{element.company.name}}</span> </td>
   </ng-container>
 
   <!-- Symbol Column -->
@@ -42,22 +42,16 @@
     <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
   </ng-container>
 
-  <div class="icons-div">
-  <ng-container matColumnDef="comments">
+  
+  <ng-container matColumnDef="icons">
     <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element" > <button mat-icon-button color="primary" (click)="showComments(element.customer_id)" ><mat-icon>comment</mat-icon></button> </td>
+    <td mat-cell *matCellDef="let element" > 
+      <button mat-icon-button color="primary" matTooltip="View Comments" (click)="showComments(element.customer_id)" ><mat-icon>comment</mat-icon></button> 
+      <button mat-icon-button color="primary" matTooltip="Edit Customer" (click)="editCustomer(element.customer_id)" ><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button color="primary" matTooltip="Delete Customer" (click)="deleteCustomer(element.customer_id)" ><mat-icon>delete_forever</mat-icon></button>
+    </td>
   </ng-container>
 
-  <ng-container matColumnDef="addcomment">
-      <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let element" > <button mat-icon-button color="primary" (click)="editCustomer(element.customer_id)" ><mat-icon>edit</mat-icon></button> </td>
-    </ng-container>
-
-  <ng-container matColumnDef="deleteclient">
-    <th mat-header-cell *matHeaderCellDef>  </th>
-    <td mat-cell *matCellDef="let element" > <button mat-icon-button color="primary" (click)="deleteCustomer(element.customer_id)" ><mat-icon>delete_forever</mat-icon></button> </td>
-  </ng-container>
- </div>
    
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
