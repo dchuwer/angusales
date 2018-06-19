@@ -22,7 +22,8 @@ router.get('/company', (req, res) => {
       
       data.reload()
       .then(data=>{
-        res.send(data)
+      
+      res.send(data)
       })} , (err)=>{
       console.error(err)
       })
@@ -41,8 +42,13 @@ router.get('/company', (req, res) => {
 router.put('/updatecompany', (req, res) => {
       
   Company.updateCompany(req.body).then((data)=>{
-    res.send(data);
-  }).catch((err)=>{console.error(err);
+    Company.model.find( {where: {company_id : req.body.company_id} })
+    .then(data=>{
+      res.send(data)
+    })} , (err)=>{
+      console.error(err)
+    })
+    .catch((err)=>{console.error(err);
     throw error;
   });
 }) 

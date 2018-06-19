@@ -67,13 +67,13 @@ Company.model.hasMany(this.model, {foreignKey: 'company_id'})
   }
 
   updateClient(client) {
-    console.log(client.company.company_id)
+    console.log(client)
     return this.model.update({ firstname: client.firstname,
       lastname: client.lastname,
-      company_id : client.company.company_id,
+      company_id : client.company_id,
       phone: client.phone,
       email : client.email               
-    }, {where : {customer_id : client.customer_id} });
+    }, {where : {customer_id : client.customer_id},returning: true });
   }
 
   deleteClient(clientId) {

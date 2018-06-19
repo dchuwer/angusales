@@ -44,12 +44,16 @@ router.get('/client', (req, res) => {
   }) 
 
   router.put('/updateclient', (req, res) => {
-      
+    let clientId = req.body.customer_id;
     Client.updateClient(req.body).then((data)=>{
-      res.send(data);
-    }).catch((err)=>{console.error(err);
-      throw error;
-    });
+          Client.model.find( {where: {customer_id : clientId},
+          include: [{ model: Company.model, attributes: ['name']}]
+        }).then(data=>{
+        
+        res.send(data)
+        })} , (err)=>{
+        console.error(err)
+        })
 }) 
 
   router.delete('/deleteclient/:clientId', (req, res) => {

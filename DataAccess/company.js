@@ -34,14 +34,11 @@ class CompanyModel {
   }
 
   addCompany(newCompany) {
-    return this.model.create({ name: newCompany.name,
-      country: newCompany.country
-              
-    });
+    return this.model.create( newCompany);
   }
 
   deleteCompany(companyId) {
-    console.log("entrei no deletecompany")
+    
     //this.model.hasMany(Customer.model, {foreignKey: 'company_id', onDelete: 'CASCADE', hooks: true})
     //Customer.model.belongsTo(this.model, {foreignKey: 'company_id', onDelete: 'CASCADE',hooks: true})
     return this.model.destroy( {where : {company_id : companyId} });
@@ -49,10 +46,9 @@ class CompanyModel {
 
   updateCompany(company) {
     
-    return this.model.update({ name: company.name,
-      country: company.country
+    return this.model.update(company,
                     
-    }, {where : {company_id : company.company_id} });
+    {where : {company_id : company.company_id} });
   }
  
 }

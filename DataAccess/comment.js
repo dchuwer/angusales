@@ -37,13 +37,13 @@ constructor(){
 }
 
   getComment(client){
-     return this.model.findAll({where: { customer_id: client}}
-      
-    );
+     return this.model.findAll({where: { customer_id: client}
+    
+    });
   }
 
   addComment(newComment) {
-    
+    console.log(newComment)
     return this.model.create({   
                                  text: newComment.text,
                                  customer_id : newComment.customer_id,

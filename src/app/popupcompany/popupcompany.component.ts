@@ -16,7 +16,7 @@ constructor(private companyService : CompanyService, public dialogRef: MatDialog
   @Inject(MAT_DIALOG_DATA) public data: any) {
         this.newCompany = data;
         
-        this.companyService.companyUpdated.subscribe((companies)=>{
+        this.companyService.generalUpdated.subscribe((companies)=>{
           this.companies = companies; 
       });
   }
@@ -26,11 +26,13 @@ constructor(private companyService : CompanyService, public dialogRef: MatDialog
     if(this.showButton){
       
       
-
-      this.companyService.addCompany(this.newCompany);
+      this.companyService.route = "apicompany/addcompany"
+      this.companyService.addItem(this.newCompany);
     }
-    else
-      this.companyService.updateCompany(this.newCompany);
+    else {
+      this.companyService.route = '/apicompany/updatecompany'
+      this.companyService.updateItem(this.newCompany);
+    }
     this.dialogRef.close();
   }
   
@@ -40,11 +42,10 @@ constructor(private companyService : CompanyService, public dialogRef: MatDialog
   }
 
 ngOnInit() {
-  // this.companies = this.companyService.companies;
-  // if (this.newClient.customer_id > 0)
-  //   this.showButton = false;
-  // // if (this.showButton) 
-  //    this.newClient = new Client();
+  
+  if (this.newCompany.company_id > 0)
+    this.showButton = false;
+ 
   
 }
 

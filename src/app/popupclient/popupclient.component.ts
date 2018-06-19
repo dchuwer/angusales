@@ -11,27 +11,35 @@ import { ClientService } from '../client.service';
 })
 export class PopupclientComponent implements OnInit {
     showButton : boolean = true;
-    newClient = new Client();
+    selected: string;
+    debugger
+  
     companies = []
   constructor(private companyService : CompanyService,private clientService : ClientService, public dialogRef: MatDialogRef<PopupclientComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-          this.newClient = data;
-          
-          this.companyService.companyUpdated.subscribe((companies)=>{
-            this.companies = companies; 
-        });
+      debugger
+         this.companyService.getAll();
+         this.companyService.generalUpdated.subscribe((companies)=>{
+         this.companies = companies; 
+       });
     }
 
     addNewClient() {
-      this.newClient.company =  this.companies.find( x => x.name == this.newClient.company )
+      
+      
+      this.data.company_id =  parseInt(this.data.company_id)
+      
       if(this.showButton){
         
-        console.log(this.newClient)
-
-        this.clientService.addClient(this.newClient);
+        this.clientService.route = "apiclient/addclient"
+        this.clientService.addItem(this.data);
       }
-      else
-        this.clientService.updateClient(this.newClient);
+      else{
+        
+        this.clientService.route = "apiclient/updateclient"
+        this.clientService.updateItem(this.data);
+      }
+      
       this.dialogRef.close();
     }
     
@@ -41,11 +49,15 @@ export class PopupclientComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.companies = this.companyService.companies;
-    if (this.newClient.customer_id > 0)
+   
+    if (this.data.customer_id > 0){
       this.showButton = false;
-    // if (this.showButton) 
-    //    this.newClient = new Client();
+      this.data.company_id = this.data.company_id.toString();
+    }
+    else
+    this.data.company_id = "";
+    
+  
     
   }
 

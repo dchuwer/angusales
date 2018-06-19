@@ -26,6 +26,8 @@ import { CommentComponent } from './comment/comment.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { CompanyComponent } from './company/company.component';
 import { PopupcompanyComponent } from './popupcompany/popupcompany.component';
+import { BaseService } from './base.service';
+import { CommentService } from './comment.service';
 
 @NgModule({
   declarations: [ 
@@ -56,11 +58,12 @@ import { PopupcompanyComponent } from './popupcompany/popupcompany.component';
     AppRoutingModule,
     RouterModule,
     MatTooltipModule
+    
    
   
   ],
   entryComponents: [PopupclientComponent, CommentComponent, PopupcompanyComponent],
-  providers: [ClientService,CompanyService],
+  providers: [BaseService, ClientService, CompanyService, CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

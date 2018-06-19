@@ -11,16 +11,17 @@
 </div>
          <br>
          <mat-form-field>
-            <input matInput [(ngModel)]="newClient.firstname" placeholder="First Name">
+            <input matInput [(ngModel)]="data.firstname" placeholder="First Name">
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput [(ngModel)]="newClient.lastname" placeholder="Last Name">
+          <input matInput [(ngModel)]="data.lastname" placeholder="Last Name">
         </mat-form-field>
         <br>
         <mat-form-field>
-          <mat-select  [(ngModel)]="newClient.company"  placeholder="Company">
-            <mat-option *ngFor="let company of companies"  [value]="company.name">
+          
+          <mat-select  [(value)]="data.company_id"  placeholder="Company">
+            <mat-option *ngFor="let company of companies"  value="{{company.company_id}}">
               {{ company.name }}
             </mat-option>
           </mat-select>
@@ -28,18 +29,18 @@
         
         <br>
         <mat-form-field>
-          <input matInput [(ngModel)]="newClient.phone" placeholder="Phone">
+          <input matInput [(ngModel)]="data.phone" placeholder="Phone">
         </mat-form-field>
         <br>
         <mat-form-field>
-          <input matInput [(ngModel)]="newClient.email" placeholder="Email">
+          <input matInput [(ngModel)]="data.email" placeholder="Email">
         </mat-form-field> 
         <br>
 
       <button mat-button mat-dialog-close>Cancel</button>
       <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-      <button mat-button mat-dialog-close (click)="addNewClient(newClient)">Submit</button>
+      <button mat-button mat-dialog-close (click)="addNewClient(data)">Submit</button>
        <span class="editmode" *ngIf="!this.showButton">
-        <button mat-button mat-dialog-close (click)="deleteClient(newClient.customer_id)">Delete</button>
+        <button mat-button mat-dialog-close (click)="deleteClient(data.customer_id)">Delete</button>
        </span>
        

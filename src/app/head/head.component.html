@@ -2,12 +2,12 @@
   <mat-toolbar>
     <div class="menu">
       <span>AnguSales</span>
-      <button mat-button routerLink="/">Home</button>
-      <button mat-button routerLink="/client">Customer</button>
-      <button mat-button routerLink="/company">Company</button>
+      <button mat-button [ngClass]="{'selectButton':router.url == '/'}" routerLink="/">Home</button>
+      <button mat-button [ngClass]="{'selectButton':router.url == '/client'}" routerLink="/client">Customer</button>
+      <button mat-button [ngClass]="{'selectButton':router.url == '/company'}"routerLink="/company">Company</button>
   </div>
     <button *ngIf='router.url == "/client"'  id="newButton" (click)="addClient()" mat-raised-button color="primary">Add New Customer</button> 
     <button *ngIf='router.url == "/company"'  id="newButton" (click)="addCompany()" mat-raised-button color="primary">Add New Company</button> 
     
   </mat-toolbar>
-</div>
+</div> 

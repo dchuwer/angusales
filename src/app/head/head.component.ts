@@ -16,9 +16,10 @@ export class HeadComponent implements OnInit {
   constructor(private clientService: ClientService, public dialog: MatDialog, public router: Router) { }
   
   addClient(){
+    
     let dialogRef = this.dialog.open(PopupclientComponent, {
       width: '600px',
-      data: {}
+      data: { }
     });
   }
 

@@ -3,8 +3,8 @@ import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
 import { ClientService } from '../client.service';
 import { CommentComponent } from '../comment/comment.component';
 import { PopupclientComponent } from '../popupclient/popupclient.component';
-import { CompanyService } from '../company.service';
-import { Subscriber } from 'rxjs';
+import { CommentService } from '../comment.service';
+import { Comments } from 'Comments'
 
 @Component({
   selector: 'app-client',
@@ -18,8 +18,8 @@ export class ClientComponent {
   newClient : Object;
   dataSource = new MatTableDataSource(this.clients);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor (private clientService : ClientService, private companyService: CompanyService,public dialog: MatDialog) {
-        this.clientService.clientUpdated.subscribe((data)=>{
+  constructor (private clientService : ClientService, private commentService: CommentService,public dialog: MatDialog) {
+        this.clientService.generalUpdated.subscribe((data)=>{
             this.clients = data;
             this.dataSource = new MatTableDataSource(this.clients);
             this.dataSource.paginator = this.paginator;
@@ -37,34 +37,40 @@ export class ClientComponent {
     this.dataSource.filter = filterValue;
   }
 
-  editCustomer(customerId){
-    let client = this.clientService.findClient(customerId)
-    let companySelected = this.companyService.findCompany(client.company_id)
-    client.company = companySelected.name;
+  editCustomer(customer){
+        
     let dialogRef = this.dialog.open(PopupclientComponent, {
       width: '600px',
-      data: client
-    });
-    
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.clientService.addClient(result);
+      data: customer
     });
   }
 
   deleteCustomer(customerId){
-    this.clientService.deleteClient(customerId);
+    this.clientService.route = "apiclient/deleteclient/"
+    this.clientService.deleteItem(customerId);
+  }
+
+  addFilter(filter) {
+    this.filterUp = true;
+    this.clientService.route = 'apiclient/filtercompany/'
+    this.clientService.getItem(filter);
   }
 
   
-
-  showComments(client){
-    this.clientService.getComments(client)
-    let upsubscribe = this.clientService.commentUpdated.subscribe((data)=>{
-      
+  showComments(clientId){
+    
+    this.commentService.route = 'apiclient/comment/'
+    this.commentService.getItem(clientId)
+    let upsubscribe = this.commentService.generalUpdated.subscribe((data)=>{
+      debugger
       console.log(data)
-      if (data.length == 0) 
-         data[0] = {customer_id : client};
+      
+      if (data.length == 0) {
+        let newComment = new Comments()
+        newComment.customer_id = clientId
+        data.push(newComment)
+      }
+         
       console.log(data)
       if (this.first) {
           this.first = false;
@@ -81,23 +87,12 @@ export class ClientComponent {
       }
      
     })
-
-   
   }
- 
-  addFilter(filter) {
-    console.log(filter)
-    this.filterUp = true;
-    let filterCompany =  this.companyService.companies.find( x => x.name == filter )
-    //let companySelected = this.companyService.findCompany(filter)
-    console.log(filter)
-    this.clientService.getFilter(filterCompany.company_id);
-
-  }
-    
   ngOnInit() {
     this.filterUp= false;
-    this.clientService.getClients();
+    this.clientService.getAll();
    
   }
 }
+
+ 
